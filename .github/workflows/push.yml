@@ -36,7 +36,7 @@ jobs:
         with:
           node-version: '12.x'
       - name: npm install and build
-        working-directory: ./functions/client
+        working-directory: ./functions/Client
         run: |
           npm install
           npm run build
