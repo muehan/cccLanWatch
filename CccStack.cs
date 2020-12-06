@@ -50,7 +50,7 @@ class CccStack : Stack
         var codeBlobUrl = SharedAccessSignature.SignedBlobReadUrl(blob, storageAccount);
 
         // Create FunctionApp
-        var app = new FunctionApp("function-app", new FunctionAppArgs
+        var app = new FunctionApp("ccc-lan-watch-app", new FunctionAppArgs
         {
             ResourceGroupName = resourceGroup.Name,
             AppServicePlanId = appServicePlan.Id,
