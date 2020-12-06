@@ -35,11 +35,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-
-      - name: move to folder
-        run: |
-          cd functions/client
       - name: npm install and build
+        working-directory: ./functions/client
         run: |
           npm install
           npm run build
