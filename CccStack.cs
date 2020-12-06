@@ -16,7 +16,8 @@ class CccStack : Stack
         {
             ResourceGroupName = resourceGroup.Name,
             AccountReplicationType = "LRS",
-            AccountTier = "Standard"
+            AccountTier = "Standard",
+            AllowBlobPublicAccess = true,
         });
 
         // Create AppService Plan
