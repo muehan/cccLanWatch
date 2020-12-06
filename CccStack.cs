@@ -72,8 +72,13 @@ class CccStack : Stack
         });
 
         this.Endpoint = Output.Format($"https://{app.DefaultHostname}/api/index");
+        this.StorageConnectionString = storageAccount.PrimaryBlobConnectionString;
     }
 
     [Output]
     public Output<string> Endpoint { get; set; }
+
+    [Output]
+    public Output<string> StorageConnectionString { get; set; }
+
 }

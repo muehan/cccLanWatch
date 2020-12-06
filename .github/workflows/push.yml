@@ -25,3 +25,24 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
           PULUMI_CI: up 
+  client:
+    name: build and deploy client
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build
+      - name: Upload To Azure Blob Storage
+        uses: bacongobbler/azure-blob-storage-upload@v1.0.0
+        with:
+          source_dir: dist
+          container_name: client
+          connection_string: ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }}
