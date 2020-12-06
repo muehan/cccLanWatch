@@ -32,17 +32,23 @@ class CccStack : Stack
         });
 
         // Create Container
-        var container = new Container("zips", new ContainerArgs
+        var privateContainer = new Container("zips", new ContainerArgs
         {
             StorageAccountName = storageAccount.Name,
             ContainerAccessType = "private"
+        });
+
+         var publicContainer = new Container("client", new ContainerArgs
+        {
+            StorageAccountName = storageAccount.Name,
+            ContainerAccessType = "public"
         });
 
         // Create BlobStorage
         var blob = new Blob("zip", new BlobArgs
         {
             StorageAccountName = storageAccount.Name,
-            StorageContainerName = container.Name,
+            StorageContainerName = privateContainer.Name,
             Type = "Block",
             Source = new FileArchive("./functions/bin/Debug/netcoreapp3.1/publish")
         });
