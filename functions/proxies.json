@@ -6,28 +6,28 @@
                 "methods": ["GET"],
                 "route": "/"
             },
-            "backendUri": "https://cccstorage73f15ba.blob.core.windows.net/clientc5cad2d6/dist/index.html"
+            "backendUri": "https://cccstorage73f15ba.blob.core.windows.net/clientc5cad2d6/index.html"
         },
         "css": {
             "matchCondition": {
                 "methods": ["GET"],
                 "route": "/css/{*restOfPath}"
             },
-            "backendUri": "https://cccstorage73f15ba.blob.core.windows.net/clientc5cad2d6/dist/css/{restOfPath}"
+            "backendUri": "https://cccstorage73f15ba.blob.core.windows.net/clientc5cad2d6/css/{restOfPath}"
         },
         "js": {
             "matchCondition": {
                 "methods": ["GET"],
                 "route": "/js/{*restOfPath}"
             },
-            "backendUri": "https://cccstorage73f15ba.blob.core.windows.net/clientc5cad2d6/dist/js/{restOfPath}"
+            "backendUri": "https://cccstorage73f15ba.blob.core.windows.net/clientc5cad2d6/js/{restOfPath}"
         },
         "img": {
             "matchCondition": {
                 "methods": ["GET"],
                 "route": "/img/{*restOfPath}"
             },
-            "backendUri": "https://cccstorage73f15ba.blob.core.windows.net/clientc5cad2d6/dist/img/{restOfPath}"
+            "backendUri": "https://cccstorage73f15ba.blob.core.windows.net/clientc5cad2d6/img/{restOfPath}"
         }
     }
 }
