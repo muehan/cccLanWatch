@@ -36,12 +36,12 @@ class CccStack : Stack
         {
             StorageAccountName = storageAccount.Name,
             ContainerAccessType = "private"
-        });
+        }); 
 
          var publicContainer = new Container("client", new ContainerArgs
         {
             StorageAccountName = storageAccount.Name,
-            ContainerAccessType = "private"
+            ContainerAccessType = "blob"
         });
 
         // Create BlobStorage
