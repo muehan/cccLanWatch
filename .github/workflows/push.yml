@@ -44,5 +44,5 @@ jobs:
         uses: bacongobbler/azure-blob-storage-upload@v1.0.0
         with:
           source_dir: ./functions/Client/dist
-          container_name: client
+          container_name: clientc5cad2d6
           connection_string: ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }}
