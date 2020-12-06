@@ -36,6 +36,9 @@ jobs:
         with:
           node-version: '12.x'
 
+      - name: move to folder
+        run: |
+          cd functions/client
       - name: npm install and build
         run: |
           npm install
