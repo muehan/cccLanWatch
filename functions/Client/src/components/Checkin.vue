@@ -63,7 +63,6 @@ export default {
   methods: {
     personType: function(entryType) {
       this.type = entryType;
-      console.log(`you are a: ${entryType}`);
     },
   },
 };
