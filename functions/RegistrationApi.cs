@@ -34,7 +34,7 @@ namespace Functions
         [FunctionName("UpdateRegistration")]
         public static async Task<IActionResult> UpdateRegistration(
             [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "registration/{id}")] HttpRequest req,
-            [Table("todos", Connection = "AzureWebJobsStorage")] CloudTable registrationTable,
+            [Table("registration", Connection = "AzureWebJobsStorage")] CloudTable registrationTable,
             ILogger log,
             string id)
         {
@@ -63,8 +63,8 @@ namespace Functions
 
         [FunctionName("GetRegistrations")]
         public static async Task<IActionResult> GetTodos(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "todo")] HttpRequest req,
-            [Table("todos", Connection = "AzureWebJobsStorage")] CloudTable registrationTable,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "registration")] HttpRequest req,
+            [Table("registration", Connection = "AzureWebJobsStorage")] CloudTable registrationTable,
             ILogger log)
         {
             log.LogInformation("Getting all todos");
@@ -76,8 +76,8 @@ namespace Functions
 
         [FunctionName("GetRegistrationById")]
         public static IActionResult GetTodoById(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "todo/{id}")] HttpRequest req,
-            [Table("todos", "TODO", "{id}", Connection = "AzureWebJobsStorage")] RegistrationTableEntity entity,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "registration/{id}")] HttpRequest req,
+            [Table("registration", "REGISTRATION", "{id}", Connection = "AzureWebJobsStorage")] RegistrationTableEntity entity,
             ILogger log,
             string id)
         {
