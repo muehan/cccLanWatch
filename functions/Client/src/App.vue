@@ -1,18 +1,16 @@
 <template>
   <div id="app">
     <img alt="Cube logo" src="./assets/cubelogo.png">
-    <Checkin/>
+    <div>
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
-import Checkin from './components/Checkin.vue'
-
 export default {
   name: 'App',
-  components: {
-    Checkin
-  }
+  components: { }
 }
 </script>
 
