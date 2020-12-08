@@ -41,6 +41,10 @@ namespace Functions
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var updated = JsonConvert.DeserializeObject<RegistrationUpdateModel>(requestBody);
 
+            if(updated.End == null){
+                updated.End = DateTime.UtcNow;
+            }
+
             log.LogInformation($"update registration with id: {id}, End: {updated.End}");
 
             var findOperation = TableOperation.Retrieve<RegistrationTableEntity>("TODO", id);
@@ -58,7 +62,7 @@ namespace Functions
             var replaceOperation = TableOperation.Replace(existingRow);
             await registrationTable.ExecuteAsync(replaceOperation);
 
-            return new OkObjectResult(existingRow.ToTodo());
+            return new OkObjectResult(existingRow.ToRegistraion());
         }
 
         [FunctionName("GetRegistrations")]
@@ -71,7 +75,7 @@ namespace Functions
             var query = new TableQuery<RegistrationTableEntity>();
             var segment = await registrationTable.ExecuteQuerySegmentedAsync(query, null);
 
-            return new OkObjectResult(segment.Select(Mappings.ToTodo));
+            return new OkObjectResult(segment.Select(Mappings.ToRegistraion));
         }
 
         [FunctionName("GetRegistrationById")]
@@ -88,13 +92,13 @@ namespace Functions
                 return new NotFoundResult();
             }
 
-            return new OkObjectResult(entity.ToTodo());
+            return new OkObjectResult(entity.ToRegistraion());
         }
     }
 
     public class RegistrationUpdateModel
     {
-        public DateTime End { get; set; }
+        public DateTime? End { get; set; }
     }
 
     public class RegistrationCreateModel
@@ -137,7 +141,8 @@ namespace Functions
 
     public static class Mappings
     {
-        public static RegistrationTableEntity ToTableEntity(this Registration registration)
+        public static RegistrationTableEntity ToTableEntity(
+            this Registration registration)
         {
             var entity = new RegistrationTableEntity
             {
@@ -153,7 +158,8 @@ namespace Functions
             return entity;
         }
 
-        public static Registration ToTodo(this RegistrationTableEntity entity)
+        public static Registration ToRegistraion(
+            this RegistrationTableEntity entity)
         {
             var registration = new Registration
             {

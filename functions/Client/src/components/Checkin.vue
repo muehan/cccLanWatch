@@ -95,15 +95,27 @@ export default {
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data)
+          localStorage.registrationId = data.id
           this.$router.push({
             name: 'active',
-            params: { id: data.id }
+            params: { id: data.id },
           })
         })
         .catch(error => {
           console.error('Error:', error)
         })
     },
+  },
+  mounted() {
+    console.log('mounted');
+    console.log(localStorage.registrationId);
+    let id = localStorage.registrationId
+    if (id) {
+      this.$router.push({
+        name: 'active',
+        params: { id: id },
+      })
+    }
   },
 }
 </script>

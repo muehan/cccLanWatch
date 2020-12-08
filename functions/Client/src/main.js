@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: Checkin },
+  { path: '/', name: 'checkin', component: Checkin },
   { path: '/active/:id', name: 'active', component: Active },
   { path: '/utilization', component: Utilization },
 ]
