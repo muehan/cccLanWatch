@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import Checkin from './components/Checkin.vue'
 import Active from './components/Active.vue'
+import Utilization from './components/Utilization.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -15,6 +16,7 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', component: Checkin },
   { path: '/active/:id', name: 'active', component: Active },
+  { path: '/utilization', component: Utilization },
 ]
 
 const router = new VueRouter({

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <h1>Pila Lan Guest Registration</h1>
 
     <div v-if="!type">

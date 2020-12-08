@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Cube logo" src="./assets/cubelogo.png">
-    <div>
+    <div class="container">
       <router-view />
     </div>
   </div>

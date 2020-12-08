@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <p>{{ registration.name }}</p>
     <p>{{ registration.start | formatDate }}</p>
   </div>
