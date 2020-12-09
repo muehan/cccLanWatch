@@ -14,6 +14,8 @@ namespace Functions
 {
     public static class RegistrationApi
     {
+        private const string PartitionKey = "REGISTRATION";
+
         [FunctionName("CreateRegistration")]
         public static async Task<IActionResult> CreateRegistration(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "registration")] HttpRequest req,
@@ -47,7 +49,7 @@ namespace Functions
 
             log.LogInformation($"update registration with id: {id}, End: {updated.End}");
 
-            var findOperation = TableOperation.Retrieve<RegistrationTableEntity>("TODO", id);
+            var findOperation = TableOperation.Retrieve<RegistrationTableEntity>(PartitionKey, id);
             var findResult = await registrationTable.ExecuteAsync(findOperation);
 
             if (findResult.Result == null)
@@ -57,7 +59,7 @@ namespace Functions
 
             var existingRow = (RegistrationTableEntity)findResult.Result;
 
-            existingRow.End = updated.End;
+            existingRow.End = updated.End?.ToString("yyyy-MM-ddTHH:mm:ss");
 
             var replaceOperation = TableOperation.Replace(existingRow);
             await registrationTable.ExecuteAsync(replaceOperation);
@@ -81,7 +83,7 @@ namespace Functions
         [FunctionName("GetRegistrationById")]
         public static IActionResult GetTodoById(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "registration/{id}")] HttpRequest req,
-            [Table("registration", "REGISTRATION", "{id}", Connection = "AzureWebJobsStorage")] RegistrationTableEntity entity,
+            [Table("registration", PartitionKey, "{id}", Connection = "AzureWebJobsStorage")] RegistrationTableEntity entity,
             ILogger log,
             string id)
         {
@@ -136,7 +138,8 @@ namespace Functions
         public string Type { get; set; }
         public string FromMember { get; set; }
         public DateTime Start { get; set; }
-        public DateTime? End { get; set; }
+        //https://social.msdn.microsoft.com/Forums/en-US/6b78647b-9117-48d9-90b2-653ce1f34448/table-storage-source-with-nullable-datetime-property-does-not-work-if-property-value-of-first-table?forum=AzureDataFactory
+        public string End { get; set; }
     }
 
     public static class Mappings
@@ -152,7 +155,7 @@ namespace Functions
                 Type = registration.Type,
                 FromMember = registration.FromMember,
                 Start = registration.Start,
-                End = registration.End,
+                End = registration.End?.ToString("yyyy-MM-ddTHH:mm:ss"),
             };
 
             return entity;
@@ -168,7 +171,7 @@ namespace Functions
                 Type = entity.Type,
                 FromMember = entity.FromMember,
                 Start = entity.Start,
-                End = entity.End,
+                End = DateTime.TryParse(entity.End, out DateTime date) ? date : default(DateTime?),
             };
 
             return registration;

@@ -23,7 +23,7 @@ export default {
     fetch(`${process.env.VUE_APP_API_URL}registration`)
       .then(response => response.json())
       .then(data => {
-        this.registrations = data
+        this.registrations = data.filter(x => x.end == null)
       })
       .catch(error => {
         console.error('Error:', error)
